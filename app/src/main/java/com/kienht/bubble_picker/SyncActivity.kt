@@ -36,14 +36,15 @@ class SyncActivity : AppCompatActivity() {
                     title = titles[position]
                     gradient = BubbleGradient(colors.getColor((position * 2) % 8, 0),
                             colors.getColor((position * 2) % 8 + 1, 0), BubbleGradient.VERTICAL)
-                    imgUrl = "http://sohanews.sohacdn.com/2018/4/11/hat9-1523392964439195574255.jpg"
-//                    imgDrawable = ContextCompat.getDrawable(this@SyncActivity, images.getResourceId(position, 0))
+                    //imgUrl = "http://sohanews.sohacdn.com/2018/4/11/hat9-1523392964439195574255.jpg"
+                    imgDrawable = ContextCompat.getDrawable(this@SyncActivity, images.getResourceId(position, 0))
 
                 }
             }
         }
 
         picker.bubbleSize = 5
+        picker.isAlwaysSelected = false
         picker.listener = object : BubblePickerListener {
             override fun onBubbleDeselected(item: PickerItem) {
                 toast("Unselected: " + item.title!!)

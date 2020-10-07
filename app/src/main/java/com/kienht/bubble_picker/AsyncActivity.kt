@@ -40,13 +40,15 @@ class AsyncActivity : AppCompatActivity(), BubblePickerListener {
                         title = titles[position]
                         gradient = BubbleGradient(colors.getColor((position * 2) % 8, 0),
                                 colors.getColor((position * 2) % 8 + 1, 0), BubbleGradient.VERTICAL)
-                        imgUrl = "http://sohanews.sohacdn.com/2018/4/11/hat9-1523392964439195574255.jpg"
+                        //imgUrl = "http://sohanews.sohacdn.com/2018/4/11/hat9-1523392964439195574255.jpg"
                     }
                 }
             }
 
-            picker!!.bubbleSize = 10
+            picker!!.bubbleSize = 1
             picker!!.listener = this@AsyncActivity
+            picker!!.isAlwaysSelected = false
+            picker!!.swipeMoveSpeed = 2f
 
             setContentView(picker)
 
