@@ -33,7 +33,9 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation files('libs/jbox2d-library-2.1.2.2.jar')
+    //Version jbox2d-library-2.1.2.3 fix this issue: https://code.google.com/archive/p/jbox2d/issues/32
+    //There is also new version 2.2.1.1 available - but it's usage require
+    implementation files('libs/jbox2d-library-2.1.2.3.jar')
     implementation files('libs/slf4j-api-1.7.22.jar')
     implementation files('libs/universal-image-loader-1.9.5.jar')
 
