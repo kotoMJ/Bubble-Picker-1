@@ -29,19 +29,19 @@ class SyncActivity : AppCompatActivity() {
 
         val titles = resources.getStringArray(R.array.countries)
         colors = resources.obtainTypedArray(R.array.colors)
-        images = resources.obtainTypedArray(R.array.images)
 
         picker.adapter = object : BubblePickerAdapter {
             override val totalCount = titles.size
 
             @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
             override fun getItem(position: Int): PickerItem {
+                val currentColor = colors.getColor((position * 2) % 8 + 1, 0)
                 return PickerItem().apply {
                     title = titles[position]
-                    gradient = BubbleGradient(colors.getColor((position * 2) % 8, 0), colors.getColor((position * 2) % 8 + 1, 0), BubbleGradient.VERTICAL)
+                    //gradient = BubbleGradient(colors.getColor((position * 2) % 8, 0), currentColor, BubbleGradient.VERTICAL)
                     //imgUrl = "http://sohanews.sohacdn.com/2018/4/11/hat9-1523392964439195574255.jpg"
-                    imgDrawable = ContextCompat.getDrawable(this@SyncActivity, /*images.getResourceId(position, 0)*/R.drawable.ic_aura_color_filter)?.apply { setTint(colors.getColor((position * 2) % 8 + 1, 0)) }
-
+                    imgDrawable = ContextCompat.getDrawable(this@SyncActivity, /*images.getResourceId(position, 0)*/R.drawable.ic_aura_color_filter)?.apply { setTint(currentColor) }
+                    bgColor = currentColor
                 }
             }
         }
@@ -74,7 +74,6 @@ class SyncActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         colors.resources
-        images.resources
     }
 
     private fun toast(text: String) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()

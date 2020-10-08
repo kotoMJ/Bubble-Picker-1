@@ -1,5 +1,6 @@
 package com.kienht.bubblepicker.model
 
+import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.support.annotation.ColorInt
@@ -14,7 +15,10 @@ data class PickerItem @JvmOverloads constructor(var title: String? = null,
                                                 var gradient: BubbleGradient? = null,
                                                 var overlayAlpha: Float = 0.4f,
                                                 var typeface: Typeface = Typeface.DEFAULT,
-                                                @ColorInt var textColor: Int? = null,
+												val typefaceSelected: Typeface = Typeface.DEFAULT_BOLD,
+                                                @ColorInt var lightTextColor: Int? = null,
+												@ColorInt var darkTextColor: Int? = null,
+												@ColorInt var bgColor: Int = Color.parseColor("#000000"),
                                                 var textSize: Float = 40f,
                                                 var imgDrawable: Drawable? = null,
                                                 var imgUrl: String? = null,

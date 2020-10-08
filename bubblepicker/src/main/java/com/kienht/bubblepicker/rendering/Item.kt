@@ -17,6 +17,7 @@ import com.kienht.bubblepicker.toTexture
 import org.jbox2d.common.Vec2
 import java.lang.ref.WeakReference
 import android.graphics.Bitmap
+import com.kienht.bubblepicker.getTextColorByBackground
 import com.kienht.bubblepicker.resizeBitmap
 import com.nostra13.universalimageloader.core.ImageLoader
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration
@@ -123,7 +124,7 @@ data class Item(val context: WeakReference<Context>,
         }
         drawBackground(canvas, isSelected)
         drawIcon(canvas)
-        drawText(canvas)
+        drawText(canvas, isSelected)
 
         return bitmap
     }
@@ -138,26 +139,25 @@ data class Item(val context: WeakReference<Context>,
 
         //FORK NOTE add alpha for both states selected/non-selected
         if (withImage) {
-            bgPaint.alpha = (pickerItem.overlayAlpha * 110).toInt()
-        }else{
             bgPaint.alpha = (pickerItem.overlayAlpha * 0).toInt()
+        }else{
+            bgPaint.alpha = (pickerItem.overlayAlpha * 255).toInt()
         }
         canvas.drawRect(0f, 0f, bitmapSize, bitmapSize, bgPaint)
     }
 
-    private fun drawText(canvas: Canvas) {
+    private fun drawText(canvas: Canvas, isSelected: Boolean) {
         if (pickerItem.title == null) return
 
         val paint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
 
-            color = if (pickerItem.textColor == null) {
-                Color.parseColor("#ffffff")
-            } else {
-                pickerItem.textColor!!
-            }
+            //FORK NOTE: change text color by background
+            color = getTextColorByBackground(pickerItem.bgColor, pickerItem.lightTextColor, pickerItem.darkTextColor)
 
             textSize = pickerItem.textSize
-            typeface = pickerItem.typeface
+            //FORK NOTE : change typeface by selection
+            typeface = if (isSelected) pickerItem.typefaceSelected else pickerItem.typeface
+
         }
 
         val maxTextHeight = if (pickerItem.icon == null) bitmapSize / 2f else bitmapSize / 2.7f
@@ -169,12 +169,16 @@ data class Item(val context: WeakReference<Context>,
             textLayout = placeText(paint)
         }
 
-        if (pickerItem.icon == null) {
-            canvas.translate((bitmapSize - textLayout.width) / 2f, (bitmapSize - textLayout.height) / 2f)
-        } else if (pickerItem.iconOnTop) {
-            canvas.translate((bitmapSize - textLayout.width) / 2f, bitmapSize / 2f)
-        } else {
-            canvas.translate((bitmapSize - textLayout.width) / 2f, bitmapSize / 2 - textLayout.height)
+        when {
+            pickerItem.icon == null -> {
+                canvas.translate((bitmapSize - textLayout.width) / 2f, (bitmapSize - textLayout.height) / 2f)
+            }
+            pickerItem.iconOnTop -> {
+                canvas.translate((bitmapSize - textLayout.width) / 2f, bitmapSize / 2f)
+            }
+            else -> {
+                canvas.translate((bitmapSize - textLayout.width) / 2f, bitmapSize / 2 - textLayout.height)
+            }
         }
 
         textLayout.draw(canvas)
