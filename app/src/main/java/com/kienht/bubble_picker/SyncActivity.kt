@@ -37,14 +37,16 @@ class SyncActivity : AppCompatActivity() {
                     gradient = BubbleGradient(colors.getColor((position * 2) % 8, 0),
                             colors.getColor((position * 2) % 8 + 1, 0), BubbleGradient.VERTICAL)
                     //imgUrl = "http://sohanews.sohacdn.com/2018/4/11/hat9-1523392964439195574255.jpg"
-                    imgDrawable = ContextCompat.getDrawable(this@SyncActivity, images.getResourceId(position, 0))
+                    //imgDrawable = ContextCompat.getDrawable(this@SyncActivity, images.getResourceId(position, 0))
 
                 }
             }
         }
 
-        picker.bubbleSize = 5
+        picker.bubbleSize = 1
+        picker.swipeMoveSpeed = 2f
         picker.isAlwaysSelected = false
+        picker.centerImmediately = true
         picker.listener = object : BubblePickerListener {
             override fun onBubbleDeselected(item: PickerItem) {
                 toast("Unselected: " + item.title!!)
@@ -62,8 +64,8 @@ class SyncActivity : AppCompatActivity() {
     }
 
     override fun onPause() {
-        super.onPause()
         picker.onPause()
+        super.onPause()
     }
 
     override fun onDestroy() {

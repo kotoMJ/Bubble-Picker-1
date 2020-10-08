@@ -6,6 +6,11 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorPrimaryDark"/>
+
     <com.kienht.bubblepicker.rendering.BubblePicker
         android:id="@+id/picker"
         android:layout_width="match_parent"
