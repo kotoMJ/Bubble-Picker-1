@@ -1,8 +1,11 @@
 package com.kienht.bubble_picker
 
 import android.content.res.TypedArray
+import android.os.Build
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.drawable.DrawableCompat.setTint
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.kienht.bubblepicker.BubblePickerListener
@@ -31,13 +34,13 @@ class SyncActivity : AppCompatActivity() {
         picker.adapter = object : BubblePickerAdapter {
             override val totalCount = titles.size
 
+            @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
             override fun getItem(position: Int): PickerItem {
                 return PickerItem().apply {
                     title = titles[position]
-                    gradient = BubbleGradient(colors.getColor((position * 2) % 8, 0),
-                            colors.getColor((position * 2) % 8 + 1, 0), BubbleGradient.VERTICAL)
+                    gradient = BubbleGradient(colors.getColor((position * 2) % 8, 0), colors.getColor((position * 2) % 8 + 1, 0), BubbleGradient.VERTICAL)
                     //imgUrl = "http://sohanews.sohacdn.com/2018/4/11/hat9-1523392964439195574255.jpg"
-                    //imgDrawable = ContextCompat.getDrawable(this@SyncActivity, images.getResourceId(position, 0))
+                    imgDrawable = ContextCompat.getDrawable(this@SyncActivity, /*images.getResourceId(position, 0)*/R.drawable.ic_aura_color_filter)?.apply { setTint(colors.getColor((position * 2) % 8 + 1, 0)) }
 
                 }
             }
