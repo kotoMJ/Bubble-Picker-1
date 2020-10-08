@@ -46,7 +46,7 @@ class SyncActivity : AppCompatActivity() {
             }
         }
 
-        picker.bubbleSize = 1
+        picker.bubbleSize = 10
         picker.swipeMoveSpeed = 2f
         picker.isAlwaysSelected = false
         picker.centerImmediately = true

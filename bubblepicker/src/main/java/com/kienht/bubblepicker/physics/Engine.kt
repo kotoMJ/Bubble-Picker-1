@@ -49,7 +49,8 @@ object Engine {
         for (i in 0 until bodiesCount) {
             val x = if (Random().nextBoolean()) -startX else startX
             val y = if (Random().nextBoolean()) -0.5f / scaleY else 0.5f / scaleY
-            bodies.add(CircleBody(world, Vec2(x, y), bubbleRadius * scaleX, (bubbleRadius * scaleX) * 1.3f, density,
+            //FORK NOTE (1.3f increased to 1.7f)
+            bodies.add(CircleBody(world, Vec2(x, y), bubbleRadius * scaleX, (bubbleRadius * scaleX) * 1.7f, density,
                     isAlwaysSelected))
         }
         this.scaleX = scaleX

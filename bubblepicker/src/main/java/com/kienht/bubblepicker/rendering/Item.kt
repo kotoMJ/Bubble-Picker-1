@@ -117,7 +117,8 @@ data class Item(val context: WeakReference<Context>,
 
         val canvas = Canvas(bitmap)
 
-        if (isSelected && !pickerItem.isUseImgUrl || TextUtils.isEmpty(pickerItem.imgUrl)) {
+        //FORK NOTE isSelected commented since we want to have image for both states selected/non-selected
+        if (/*isSelected &&*/ !pickerItem.isUseImgUrl || TextUtils.isEmpty(pickerItem.imgUrl)) {
             drawImage(canvas)
         }
         drawBackground(canvas, isSelected)
@@ -130,10 +131,16 @@ data class Item(val context: WeakReference<Context>,
     private fun drawBackground(canvas: Canvas, withImage: Boolean) {
         val bgPaint = Paint()
         bgPaint.style = Paint.Style.FILL
-        pickerItem.color?.let { bgPaint.color = pickerItem.color!! }
+        //pickerItem.color?.let { bgPaint.color = pickerItem.color!! }
+        //bgPaint.color = Color.parseColor("#00ff0000")
+        bgPaint.color = Color.parseColor("#ffffffff")
         pickerItem.gradient?.let { bgPaint.shader = gradient }
+
+        //FORK NOTE add alpha for both states selected/non-selected
         if (withImage) {
-            bgPaint.alpha = (pickerItem.overlayAlpha * 255).toInt()
+            bgPaint.alpha = (pickerItem.overlayAlpha * 110).toInt()
+        }else{
+            bgPaint.alpha = (pickerItem.overlayAlpha * 0).toInt()
         }
         canvas.drawRect(0f, 0f, bitmapSize, bitmapSize, bgPaint)
     }
