@@ -40,7 +40,7 @@ class SyncActivity : AppCompatActivity() {
                     title = titles[position]
                     //gradient = BubbleGradient(colors.getColor((position * 2) % 8, 0), currentColor, BubbleGradient.VERTICAL)
                     //imgUrl = "http://sohanews.sohacdn.com/2018/4/11/hat9-1523392964439195574255.jpg"
-                    imgDrawable = ContextCompat.getDrawable(this@SyncActivity, /*images.getResourceId(position, 0)*/R.drawable.ic_aura_color_filter)?.apply { setTint(currentColor) }
+                    imgDrawable = ContextCompat.getDrawable(this@SyncActivity, /*images.getResourceId(position, 0)*/R.drawable.ic_aura_bubbles)?.apply { setTint(currentColor) }
                     bgColor = currentColor
                 }
             }
