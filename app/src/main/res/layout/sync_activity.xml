@@ -12,6 +12,7 @@
         android:background="@color/colorPrimaryDark"/>
 
     <com.kienht.bubblepicker.rendering.BubblePicker
+        android:windowIsTranslucent="true"
         android:id="@+id/picker"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

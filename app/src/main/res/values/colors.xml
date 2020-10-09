@@ -5,12 +5,15 @@
     <color name="colorAccent">#FF4081</color>
 
 
-    <color name="blueStart">#4EFFF3</color>
-    <color name="blueEnd">#0ca6f9</color>
-    <color name="purpleStart">#a369ff</color>
-    <color name="purpleEnd">#0e56ff</color>
-    <color name="roseStart">#FF6A00</color>
-    <color name="roseEnd">#ef0276</color>
-    <color name="greenStart">#a7f56e</color>
-    <color name="greenEnd">#11c612</color>
+    <color name="blueStart">#440099</color>
+    <color name="blueEnd">#e384a9</color>
+    <color name="purpleStart">#A50034</color>
+    <color name="purpleEnd">#cacbcc</color>
+    <color name="roseStart">#007C80</color>
+    <color name="roseEnd">#6d7ae7</color>
+    <color name="greenStart">#B2A25C</color>
+    <color name="greenEnd">#FF7500</color>
+
+    <color name="translucent">#00ff0000</color>
+
 </resources>

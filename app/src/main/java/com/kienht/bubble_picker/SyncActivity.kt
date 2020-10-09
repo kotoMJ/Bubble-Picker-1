@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.sync_activity.*
  */
 class SyncActivity : AppCompatActivity() {
 
-    lateinit var images: TypedArray
     lateinit var colors: TypedArray
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,12 +34,12 @@ class SyncActivity : AppCompatActivity() {
 
             @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
             override fun getItem(position: Int): PickerItem {
-                val currentColor = colors.getColor((position * 2) % 8 + 1, 0)
+                val currentColor = colors.getColor((position) % 8 + 1, 0)
                 return PickerItem().apply {
                     title = titles[position]
                     //gradient = BubbleGradient(colors.getColor((position * 2) % 8, 0), currentColor, BubbleGradient.VERTICAL)
                     //imgUrl = "http://sohanews.sohacdn.com/2018/4/11/hat9-1523392964439195574255.jpg"
-                    imgDrawable = ContextCompat.getDrawable(this@SyncActivity, /*images.getResourceId(position, 0)*/R.drawable.ic_aura_bubbles)?.apply { setTint(currentColor) }
+                    imgDrawable = ContextCompat.getDrawable(this@SyncActivity, /*images.getResourceId(position, 0)*/R.drawable.ic_vibe_result_aura)?.apply { setTint(currentColor) }
                     bgColor = currentColor
                 }
             }

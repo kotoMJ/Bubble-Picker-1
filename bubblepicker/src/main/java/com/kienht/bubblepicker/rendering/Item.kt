@@ -109,7 +109,7 @@ data class Item(val context: WeakReference<Context>,
 
             bmp.resizeBitmap(bitmapSize.toInt(), bitmapSize.toInt())
         } else {
-            Bitmap.createBitmap(bitmapSize.toInt(), bitmapSize.toInt(), Bitmap.Config.ARGB_4444)
+            Bitmap.createBitmap(bitmapSize.toInt(), bitmapSize.toInt(), Bitmap.Config.ARGB_8888)
         }
 
         val bitmapConfig: Bitmap.Config = bitmap.config ?: Bitmap.Config.ARGB_8888
@@ -117,16 +117,30 @@ data class Item(val context: WeakReference<Context>,
         bitmap = bitmap.copy(bitmapConfig, true)
 
         val canvas = Canvas(bitmap)
+        canvas.drawColor(Color.WHITE, PorterDuff.Mode.CLEAR)
 
         //FORK NOTE isSelected commented since we want to have image for both states selected/non-selected
         if (/*isSelected &&*/ !pickerItem.isUseImgUrl || TextUtils.isEmpty(pickerItem.imgUrl)) {
             drawImage(canvas)
         }
-        drawBackground(canvas, isSelected)
-        drawIcon(canvas)
-        drawText(canvas, isSelected)
+        //drawBackground(canvas, isSelected)
+       // drawBitmap(canvas, bitmap, isSelected)
+        //drawIcon(canvas)
+        //drawText(canvas, isSelected)
 
         return bitmap
+    }
+
+    private fun drawBitmap(canvas: Canvas, bitmap: Bitmap, isSelected: Boolean) {
+        val bgPaint = Paint()
+        bgPaint.style = Paint.Style.FILL
+        if(!isSelected) {
+            bgPaint.color = Color.parseColor("#00ff0000")
+            //bgPaint.color = Color.parseColor("#ffffffff")
+            //bgPaint.alpha = (pickerItem.overlayAlpha * 255).toInt()
+            bgPaint.alpha = (0.4f * 255).toInt()
+        }
+        canvas.drawBitmap(bitmap,0f,0f,bgPaint)
     }
 
     private fun drawBackground(canvas: Canvas, withImage: Boolean) {
@@ -134,14 +148,15 @@ data class Item(val context: WeakReference<Context>,
         bgPaint.style = Paint.Style.FILL
         //pickerItem.color?.let { bgPaint.color = pickerItem.color!! }
         //bgPaint.color = Color.parseColor("#00ff0000")
-        bgPaint.color = Color.parseColor("#ffffffff")
-        pickerItem.gradient?.let { bgPaint.shader = gradient }
+        //bgPaint.color = Color.parseColor("#ffffffff")
+        //pickerItem.gradient?.let { bgPaint.shader = gradient }
 
         //FORK NOTE add alpha for both states selected/non-selected
+
         if (withImage) {
-            bgPaint.alpha = (pickerItem.overlayAlpha * 0).toInt()
+            //bgPaint.alpha = (pickerItem.overlayAlpha * 255).toInt()
         }else{
-            bgPaint.alpha = (pickerItem.overlayAlpha * 255).toInt()
+            //bgPaint.alpha = (pickerItem.overlayAlpha * 255).toInt()
         }
         canvas.drawRect(0f, 0f, bitmapSize, bitmapSize, bgPaint)
     }
