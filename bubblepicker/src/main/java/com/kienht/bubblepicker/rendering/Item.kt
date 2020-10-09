@@ -117,7 +117,6 @@ data class Item(val context: WeakReference<Context>,
         bitmap = bitmap.copy(bitmapConfig, true)
 
         val canvas = Canvas(bitmap)
-        canvas.drawColor(Color.WHITE, PorterDuff.Mode.CLEAR)
 
         //FORK NOTE isSelected commented since we want to have image for both states selected/non-selected
         if (/*isSelected &&*/ !pickerItem.isUseImgUrl || TextUtils.isEmpty(pickerItem.imgUrl)) {

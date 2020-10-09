@@ -99,7 +99,7 @@ class BubblePicker(context: Context?, attrs: AttributeSet?) : GLSurfaceView(cont
         setZOrderOnTop(true)
         setEGLContextClientVersion(2)
         setEGLConfigChooser(8, 8, 8, 8, 16, 0)
-        holder.setFormat(PixelFormat.TRANSPARENT)
+        holder.setFormat(PixelFormat.RGBA_8888)
         setRenderer(renderer)
         renderMode = RENDERMODE_CONTINUOUSLY
     }
